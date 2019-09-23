@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1569250415 source:e:\codeblocks程序\经典位运算题\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<assert.h>
+
