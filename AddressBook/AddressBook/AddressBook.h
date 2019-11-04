@@ -3,6 +3,7 @@
 #include <assert.h>
 #include <stdlib.h>
 #include <string.h>
+#include <malloc.h>
 
 enum SEX
 {
@@ -35,3 +36,4 @@ AddressInfo* AddressBookFind(AddressBook* pbook, const char* name);
 void AddressBookSave(AddressBook* pbook, const char* filename);
 void AddressBookLoad(AddressBook* pbook, const char* filename);
 void AddressBookPrint(AddressBook* pbook);
+void menu();

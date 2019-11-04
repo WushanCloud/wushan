@@ -16,15 +16,20 @@ void AddressBookAdd(AddressBook* pbook, AddressInfo* pinfo)
 	if (pbook->_size == pbook->_capacity)
 	{
 		// 空间满了，进行扩容
-		pbook->_AIArray = realloc(pbook->_AIArray, pbook->_capacity * 2 * sizeof(AddressInfo));
-		pbook->_capacity *= 2;
+		pbook->_AIArray = realloc(pbook->_AIArray, 2 * sizeof(AddressInfo));
+		assert(pbook->_AIArray);
+		pbook->_capacity += 2;
 	}
 	//正常内存存储
-	strcpy(pbook->_AIArray[pbook->_size]._name, pinfo->_name);
-	strcpy(pbook->_AIArray[pbook->_size]._tel, pinfo->_tel);
-	pbook->_AIArray[pbook->_size]._age = pinfo->_age;
-	pbook->_AIArray[pbook->_size]._sex = pinfo->_sex;
-	pbook->_size++;
+	if (pbook->_AIArray != NULL)
+	{
+		strcpy(pbook->_AIArray[pbook->_size]._name, pinfo->_name);
+		strcpy(pbook->_AIArray[pbook->_size]._tel, pinfo->_tel);
+		pbook->_AIArray[pbook->_size]._age = pinfo->_age;
+		pbook->_AIArray[pbook->_size]._sex = pinfo->_sex;
+		pbook->_size++;
+	}
+	
 }
 
 void AddressBookSave(AddressBook* pbook, const char* filename)
@@ -83,4 +88,14 @@ void AddressBookPrint(AddressBook* pbook)
 		printf("\n");
 
 	}
+}
+void menu()
+{
+	printf("1.显示联系人\n");
+	printf("2.添加联系人\n");
+	printf("3.修改联系人\n");
+	printf("4.查询联系人\n");
+	printf("5.删除联系人\n");
+
+	printf("0.exit\n");
 }
