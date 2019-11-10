@@ -91,17 +91,19 @@ void TestList5()
 	SeqList psL;
 	SeqListInit(&psL, 4);
 
-	SeqListPushBack(&psL, 1);
-	SeqListPushBack(&psL, 2);
-	SeqListPushBack(&psL, 3);
-	SeqListPushBack(&psL, 4);
-	SeqListPushBack(&psL, 3);
 	SeqListPushBack(&psL, 6);
+	SeqListPushBack(&psL, 2);
+	SeqListPushBack(&psL, 1);
+	//SeqListPushBack(&psL, 3);
+	//SeqListPushBack(&psL, 4);
+	//SeqListPushBack(&psL, 3);
+	
 	SeqListPrint(&psL);
 
-	SeqListRemoveAll(&psL, 3);
+	/*SeqListRemoveAll(&psL, 3);
+	SeqListPrint(&psL);*/
+	SeqListBubbleSort(&psL);
 	SeqListPrint(&psL);
-
 	SeqListDestory(&psL);
 }
 int main()

@@ -31,4 +31,5 @@ void SeqListRemoveAll(SeqList* ps, SLDataType x);//数据全部删除
 void SeqListModify(SeqList* ps, size_t pos, SLDataType x);//数据修改
 void SeqListPrint(SeqList* ps);//输出
 
+void SeqListBubbleSort(SeqList* psl);//冒泡排序
 int SeqListBinaryFind(SeqList* ps, SLDataType x);//二分查找

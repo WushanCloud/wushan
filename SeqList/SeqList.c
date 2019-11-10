@@ -138,6 +138,28 @@ void SeqListPrint(SeqList* ps)//输出
 	printf("\n");
 }
 
+void SeqListBubbleSort(SeqList* ps)
+{
+	int true = 0;
+	for (size_t i = ps->size-1; i > 0; i--)
+	{
+		for (size_t j = 0; j < i; j++)
+		{
+			if (ps->array[j] > ps->array[j + 1])
+			{
+				SLDataType tmp = ps->array[j];
+				ps->array[j] = ps->array[j + 1];
+				ps->array[j + 1] = tmp;
+				true = 1;
+			}
+		}
+		if (true == 0)
+		{
+			break;
+		}
+	}
+}
+
 /*二分法查找*/
 int SeqListBinaryFind(SeqList * ps,SLDataType x)
 {
