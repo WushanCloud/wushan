@@ -1,2 +1,4 @@
-﻿  Test.c
+﻿  AddressBook.c
+D:\Git\wushan\AddressBook\AddressBook\AddressBook.c(67,41): warning C4133: “函数”: 从“AddressInfo *”到“const char *”的类型不兼容
+D:\Git\wushan\AddressBook\AddressBook\AddressBook.c(88,41): warning C4133: “函数”: 从“AddressInfo *”到“const char *”的类型不兼容
   AddressBook.vcxproj -> D:\Git\wushan\AddressBook\Debug\AddressBook.exe

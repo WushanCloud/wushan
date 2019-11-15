@@ -28,12 +28,21 @@ typedef struct AddressBook
 	size_t _capacity; // 容量
 }AddressBook;
 
-void AddressBookInit(AddressBook* pbook);
-void AddressBookAdd(AddressBook* pbook, AddressInfo* pinfo);
-void AddressBookDel(AddressBook* pbook, const char* name);
-AddressInfo* AddressBookFind(AddressBook* pbook, const char* name);
+void AddressBookInit(AddressBook* pbook);//初始化
+void ChackAddressBook(AddressBook * pbook);//检查空间是否满了
+
+void AddressBookAdd(AddressBook* pbook, AddressInfo* pinfo);//增
+void AddressBookDel(AddressBook* pbook, const char* name);//删
+void AddressBookFindPrint(AddressBook* pbook, const char* name);//查到并输出
+int AddressBookFindNum(AddressBook* pbook, const char* name);//查到返回序号
+void AddressBookRevise(AddressBook* pbook, const char* name, const char* newname);//按名字修改信息
 
 void AddressBookSave(AddressBook* pbook, const char* filename);
 void AddressBookLoad(AddressBook* pbook, const char* filename);
-void AddressBookPrint(AddressBook* pbook);
+void AddressOnePrint(AddressBook* pbook, int i);//单个打印
+void AddressBookPrint(AddressBook* pbook);//打印
 void menu();
+
+
+void AddFopen(char * p1);//写入文件；
+void readFILE();//读文件
