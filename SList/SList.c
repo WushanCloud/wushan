@@ -109,27 +109,28 @@ void SListInsertAfter(SListNode* pos, SLTDataType x)
 	pos->next = newnode;
 }
 
-void SListEraseAfter(SListNode* pos)
+void SListEraseAfter(SListNode* pos)//删除所给结点
 {
 	assert(pos);
-	if (pos->next != NULL)
+	//要删除pos得找到pos的前一个结点，获取pos的前一个结点的next域，但是所给条件找不到pos的前一个结点，所以把pos的下一个结点的值传给pos，删除pos下一个结点，达到删除pos位的效果
+	if (pos->next != NULL)//如果所给节点啊的下个节点不为空
 	{
-		pos->data = pos->next->data;
-		SListNode* del = pos->next;
-		pos->next = pos->next->next;
-		free(del);
-		del = NULL;
+		pos->data = pos->next->data;//把pos的下个结点的值传给pos
+		SListNode* del = pos->next;//记录pos的下一个结点位置，记为del
+		pos->next = pos->next->next;//把pos的下个结点的next域的值传给pos的next域
+		free(del);//释放del
+		del = NULL;//设为空指针
 	}
 }
 
-void SListRemove(SListNode* plist, SLTDataType x)
+void SListRemove(SListNode* plist, SLTDataType x)//删除给定值结点
 {
-	SListNode* delnode = SListFind(plist, x);
-	if (delnode->next!=NULL)
+	SListNode* delnode = SListFind(plist, x);//找到x的位置
+	if (delnode->next!=NULL)//如果x的位置的下个结点不为空
 	{
-		SListEraseAfter(delnode);
+		SListEraseAfter(delnode);//直接删除x
 	}
-	else
+	else//说明x为最后一个结点，进行尾删
 	{
 		SListNode* delfront = plist;
 		while (delfront->next->next != NULL)
