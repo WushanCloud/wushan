@@ -68,5 +68,45 @@ void ListPopBack(ListNode* plist)
 
 void ListPushFront(ListNode* plist, ListDataType x)
 {
+	ListNode* newnode = BuyListNode(x);
+	newnode->next = plist->next;
+	newnode->prev = plist;
+
+	plist->next = newnode;
+	newnode->next->prev = newnode;
+}
+
+void ListPopFront(ListNode* plist)
+{
+	ListNode* del = plist->next;
+	plist->next = del->next;
+	del->prev = plist;
+	free(del);
+	del->next = NULL;
+	del->prev = NULL;
+}
+
+ListNode* ListFind(ListNode* plist, ListDataType x)
+{
+	assert(plist);
+	ListNode* next = plist->next;
+
+	while (next)
+	{
+		if (next->data = x)
+		{
+			return next;
+		}
+		else
+		{
+			next = next->next;
+		}
+	}
+	return NULL;
+}
+
+void ListInsert(ListNode* pos, ListDataType x)
+{
+	ListNode* node = pos->prev;
 
 }
