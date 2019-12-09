@@ -56,14 +56,12 @@ void ListPushBack(ListNode* plist, ListDataType x)
 	plist->prev = newnode;
 }
 
-void ListPopBack(ListNode* plist)
+void ListPopBack(ListNode* plist)//删法一
 {
 	ListNode* del = plist->prev;
 	del->prev->next = del->next;
 	plist->prev = del->prev;
 	free(del);
-	del->next = NULL;
-	del->prev = NULL;
 }
 
 void ListPushFront(ListNode* plist, ListDataType x)
@@ -76,14 +74,23 @@ void ListPushFront(ListNode* plist, ListDataType x)
 	newnode->next->prev = newnode;
 }
 
-void ListPopFront(ListNode* plist)
+void ListPopFront(ListNode* plist)//删法二
 {
-	ListNode* del = plist->next;
-	plist->next = del->next;
-	del->prev = plist;
-	free(del);
-	del->next = NULL;
-	del->prev = NULL;
+	if(plist->next != plist)
+	if (plist->next != plist->prev)//剩余结点大于1个
+	{
+		ListNode* del = plist->next;
+		plist->next = del->next;
+		del->prev = plist;
+		free(del);
+	}
+	else//说明只剩一个结点
+	{
+		ListNode* del = plist->next;
+		plist->next = plist;
+		plist->prev = plist;
+		free(del);
+	}
 }
 
 ListNode* ListFind(ListNode* plist, ListDataType x)
@@ -108,5 +115,17 @@ ListNode* ListFind(ListNode* plist, ListDataType x)
 void ListInsert(ListNode* pos, ListDataType x)
 {
 	ListNode* node = pos->prev;
+	ListNode* newnode = BuyListNode(x);
+	newnode->next = pos;
+	newnode->prev = node;
+	node->next = newnode;
+	pos->prev = newnode;
+}
 
+void ListErase(ListNode* pos)
+{
+	ListNode* del = pos;
+	del->prev->next = del->next;
+	del->next->prev = del->prev;
+	free(del);
 }
