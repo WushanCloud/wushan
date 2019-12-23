@@ -4,19 +4,13 @@ void test()
 {
 	ListNode * list = ListCreate();
 	
-	ListPushFront(list, 1);
-	ListPrint(list);
-
-	ListPopBack(list);
-	ListPrint(list);
-
 	ListPushBack(list, 1);
+	ListPushBack(list, 2);
+	ListPushBack(list, 3);
+	ListPushBack(list, 4);
 	ListPrint(list);
 
-	ListPopBack(list, 1);
-	ListPrint(list);
-
-	ListPushBack(list, 1);
+	ListInsert(ListFind(list, 3), 9);
 	ListPrint(list);
 }
 

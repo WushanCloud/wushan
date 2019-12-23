@@ -100,7 +100,7 @@ ListNode* ListFind(ListNode* plist, ListDataType x)
 
 	while (next)
 	{
-		if (next->data = x)
+		if (next->data == x)
 		{
 			return next;
 		}
