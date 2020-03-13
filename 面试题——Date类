@@ -1,0 +1,214 @@
+#include <iostream>
+using namespace std;
+
+
+// 腾讯的面试题，实现一个Date类
+class Date
+{
+public:
+	//默认构造
+	Date(int year, int month, int day) :_year(0), _month(1), _day(1)
+	{
+		// 日期合法性的检查
+		if (year >= 0 
+			&& month > 0 && month < 13 
+			&& day > 0 && day < GetMonthDays(year, month))
+		{
+			_year = year;
+			_month = month;
+			_day = day;
+		}
+		else
+		{
+			cout << "非法日期" << endl;
+		}	
+	}
+	//得到每月天数
+	int GetMonthDays(int year, int month)
+	{
+		static int monthDays[13] = { 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+		int days = monthDays[month];
+		if (month == 2 && (year % 4 == 0 && year % 100 != 0) || year % 400 == 0)
+		{
+			days = 29;
+		}
+
+		return days;
+	}
+	// 拷贝构造
+	Date(Date& D)
+	{
+		this->_year = D._year;
+		this->_month = D._month;
+		this->_day = D._day;
+	}
+	// 析构
+	~Date()
+	{
+	}
+	// operator<
+	bool operator<(Date& D)
+	{
+		if (this->operator==(D)) return false;
+
+		if (this->_year > D._year)
+		{
+			return false;
+		}
+		if (this->_month > D._month)
+		{
+			return false;
+		}
+		if (this->_day > D._day)
+		{
+			return false;
+		}
+		return true;
+	}
+
+	// operator>
+	bool operator>(Date& D)
+	{
+		if (this->operator==(D)) return false;
+
+		if (this->_year < D._year)
+		{
+			return false;
+		}
+		if (this->_month < D._month)
+		{
+			return false;
+		}
+		if (this->_day < D._day)
+		{
+			return false;
+		}
+		return true;
+	}
+
+	// operator==
+	bool operator==(Date& D)
+	{
+		if (D._year == this->_year && D._month == this->_month && D._day == this->_day)
+			return true;
+		return false;
+	}
+	// operator!=
+	bool operator!=(Date& D)
+	{
+		if (D._year == this->_year && D._month == this->_month && D._day == this->_day)
+			return false;
+		return true;
+	}
+	// operator>=
+	bool operator>=(Date& D)
+	{
+		if (this->operator==(D) || this->operator>(D))
+			return true;
+		return false;
+	}
+	// operator<=
+	bool operator<=(Date& D)
+	{
+		if (this->operator==(D) || this->operator<(D))
+			return true;
+		return false;
+	}
+	// operator-
+	Date& operator-(int daynums)
+	{
+		Date D = *this;
+		int nowMonthDays;
+		while ((nowMonthDays = GetMonthDays(this->_year,this->_month)) < daynums )
+		{
+			daynums -= nowMonthDays;
+			if (D._month == 1)
+			{
+				D._month = 12;
+				D._year--;
+			}
+			else
+			{
+				D._month--;
+			}
+		}
+		return D;
+	}
+	int operator-(Date& D)
+	{
+
+		int alldays = 0;
+		if (*this > D)
+		{
+			Date Y = D;
+			while (*this != Y)
+			{
+				Y = Y + 1;
+				alldays++;
+			}
+		}
+		else if(*this < D)
+		{
+			Date Y = *this;
+			while (D != Y)
+			{
+				Y = Y + 1;
+				alldays--;
+			}
+		}
+		return alldays;
+	}
+	// operator+
+	Date& operator+(int daynums)
+	{
+		Date D = *this;
+		int alldays = D._day + daynums;
+		int nowMonthDays;
+		while ((nowMonthDays = GetMonthDays(D._year, D._month)) < alldays)
+		{
+			alldays -= nowMonthDays;
+			if (D._month == 12)
+			{
+				D._month = 1;
+				D._year++;
+			}
+			else
+			{
+				D._month++;
+			}
+		}
+		D._day = alldays;
+		return D;
+	}
+	void Print()
+	{
+		cout << _year << "-" << _month << "-" << _day << endl;
+	}
+private:
+	int _year;
+	int _month;
+	int _day;
+};
+
+int main()
+{
+	Date d1(0, 1, 1);
+	
+	d1.Print();
+
+	Date d2(100, 1, 1);
+	d2.Print();
+
+	cout << d1 - d2;
+
+	//Date d3(2021, 2, 29); // 是否是非法日期
+	//d3.Print();
+
+	// 运算符重载
+	//d1 + 100;
+	//d1 - 100;
+	//d1 - d2;
+
+
+	return 0;
+}
